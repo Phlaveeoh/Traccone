@@ -10,10 +10,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia l'intero progetto nella cartella di lavoro
 COPY . .
 
-# Sposta la cartella di lavoro nella sottocartella 'src'
-# in cui è stato spostato il file app.py
-WORKDIR /app/src
-
 # Espone la porta che l'app userà
 EXPOSE 5000
 
