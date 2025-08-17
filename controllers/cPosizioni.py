@@ -1,7 +1,7 @@
+from flask import request, jsonify
+
 def salvaPosizione(user_id):
-    # Logica per salvare la posizione
-    pass
+    return jsonify({'message': 'Not implemented yet for user {}'.format(user_id)}), 501
 
 def getPosizioni(user_id):
-    # Logica per ottenere le posizioni
-    pass
+    return jsonify({'message': 'Not implemented yet'}), 501

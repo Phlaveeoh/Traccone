@@ -15,9 +15,6 @@ def login():
     if not all([username, password]):
         return jsonify({'error': 'Missing username or password'}), 400
 
-    conn = None
-    cur = None
-    
     try:
         conn = connetti_db()
         cur = conn.cursor()
@@ -49,18 +46,16 @@ def login():
             return jsonify({'error': 'Invalid credentials'}), 401
 
     except Exception as e:
-        # Stampa l'intero stack trace per un debug più facile
         print(f"An unexpected error occurred: {e}")
         traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
-    finally:
+"""     finally:
         # Questo blocco viene sempre eseguito, garantendo la chiusura della connessione
         if cur:
             cur.close()
         if conn:
-            conn.close()
+            conn.close() """
 
 def register():
-    print("Attempting to register user")
-    return 200
+    return jsonify({'message': 'Not implemented yet'}), 501
 
