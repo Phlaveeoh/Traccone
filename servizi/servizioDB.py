@@ -8,10 +8,10 @@ def connetti_db():
     """
     try:
         conn = psycopg2.connect(
-            host=os.environ.get('localhost'),
-            database=os.environ.get('mydatabase'),
-            user=os.environ.get('user'),
-            password=os.environ.get('password')
+            host=os.environ.get('DB_HOST'),
+            database=os.environ.get('DB_NAME'),
+            user=os.environ.get('DB_USER'),
+            password=os.environ.get('DB_PASSWORD')
         )
         return conn
     except psycopg2.OperationalError as e:

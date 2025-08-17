@@ -2,4 +2,5 @@ Flask
 psycopg2-binary # Per connettersi a PostgreSQL
 Flask-SocketIO  # Per la comunicazione in tempo reale con i WebSockets
 eventlet      # Un server WSGI per far funzionare SocketIO in modo performante
-jwt
+PyJWT
+bcrypt
