@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 import os
 
 # Importa i router
-#from src.routes.auth_routes import auth_bp
+from routes.rAutenticazione import auth_bp
 from routes.rPosizioni import posizioni_bp
 
 # 1. Inizializza l'applicazione Flask
@@ -13,7 +13,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 # 2. Registra i percorsi (Routes)
 # Collega il router di autenticazione al prefisso /api/auth
-#app.register_blueprint(auth_bp, url_prefix='/api/auth')
+app.register_blueprint(auth_bp, url_prefix='/api/auth')
 
 # Collega il router delle posizioni al prefisso /api/posizioni
 app.register_blueprint(posizioni_bp, url_prefix='/api/posizioni')
