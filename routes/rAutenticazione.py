@@ -12,11 +12,11 @@ auth_bp = Blueprint('auth', __name__)
 #/api/posizioni/save 
 @auth_bp.route('/login', methods=['POST'])
 #@valida_token
-def logga(username, password):
-    return login(username, password)
+def handle_login():
+    return login()
 
 # Definizione del percorso per ottenere lo storico delle posizioni di un utente
 @auth_bp.route('/register', methods=['POST'])
 #@valida_token
-def registrati(username, password):
-    return register(username, password)
+def handle_register():
+    return register()
