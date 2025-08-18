@@ -28,7 +28,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     telefono VARCHAR(20) UNIQUE,
     nome VARCHAR(50),
-    cognome VARCHAR(50),
+    cognome VARCHAR(50)
 );
 ```
 ```
@@ -43,7 +43,7 @@ CREATE TABLE locations (
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
     group_name VARCHAR(100) UNIQUE NOT NULL,
-    owner_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    owner_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
 
 ```

@@ -20,7 +20,6 @@ def crea_token(user_id):
 
 def valida_token(f):
     """
-    Decoratore per la validazione del token JWT.
     Verifica la presenza e la validità del token nell'intestazione Authorization.
     Se il token è valido, passa l'ID utente alla funzione decorata.
     """
