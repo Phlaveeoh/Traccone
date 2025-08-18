@@ -35,7 +35,7 @@ CREATE TABLE users (
 CREATE TABLE locations (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    coordinate GEOMETRY(Point, 4326),
+    location GEOMETRY(Point, 4326),
     timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -45,7 +45,6 @@ CREATE TABLE groups (
     group_name VARCHAR(100) UNIQUE NOT NULL,
     owner_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
-
 ```
 ```
 CREATE TABLE user_groups (
