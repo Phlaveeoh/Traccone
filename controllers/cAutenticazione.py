@@ -13,7 +13,7 @@ def login():
     password = data.get('password')
     
     if not all([username, password]):
-        return jsonify({'error': 'Missing username or password'}), 400
+        return jsonify({'error': 'Mancano username o password'}), 400
 
     try:
         conn = connetti_db()
@@ -29,7 +29,7 @@ def login():
     
         # Se l'utente non esiste nel database, la risposta non viene mai gestita e la variabile user non viene creata
         if not user_data:
-            return jsonify({'error': 'Invalid credentials'}), 401
+            return jsonify({'error': 'Credenziali invalide'}), 401
 
         user_id, user_name, password_hash = user_data
         
@@ -38,13 +38,13 @@ def login():
             # Se la password è corretta, crea il token e restituisci la risposta di successo
             token = crea_token(user_id)
             return jsonify({
-                'message': 'Login successful',
+                'message': 'Login effettuato con successo',
                 'token': token,
                 'user_id': user_id
             }), 200
         else:
             # Se la password è sbagliata, restituisci un errore
-            return jsonify({'error': 'Invalid credentials'}), 401
+            return jsonify({'error': 'Credenziali invalide'}), 401
 
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
@@ -60,7 +60,7 @@ def register():
     password = data.get('password')
 
     if not all([username, password]):
-        return jsonify({'error': 'Missing username or password'}), 400
+        return jsonify({'error': 'Mancano username o password'}), 400
 
     try:
         conn = connetti_db()
@@ -69,7 +69,7 @@ def register():
         # Controlla se l'username esiste già
         cur.execute("SELECT id FROM users WHERE username = %s;", (username,))
         if cur.fetchone():
-            return jsonify({'error': 'Username already exists'}), 409
+            return jsonify({'error': 'Username già esistente'}), 409
 
         # Crea un nuovo utente
         hashed_password = hash_password(password)
@@ -83,7 +83,7 @@ def register():
         # Crea il token per il nuovo utente
         token = crea_token(user_id)
         return jsonify({
-            'message': 'Registration successful',
+            'message': 'Registrazione avvenuta con successo',
             'token': token,
             'user_id': user_id
         }), 201
