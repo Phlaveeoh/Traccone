@@ -70,14 +70,6 @@ JWT_SECRET_KEY=chiave_segreta
 ```
 La chiave può essere generata utilizzando lo script `generaChiaveJWT.py` che si trova in questa repo
 
-### 3. Avvio del Server
-
-Una volta che il database è in esecuzione e il file `.env` è configurato, puoi avviare il server backend con questo comando:
-
-```
-docker-compose up --build backend
-```
-
 ### 4. Avvio di Tutti i Servizi
 
 Per avviare sia il database che il backend contemporaneamente:
