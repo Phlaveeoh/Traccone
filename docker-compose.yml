@@ -27,12 +27,15 @@ services:
       - app-network
   
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
+    image: nginx:latest
     container_name: frontend
     ports:
       - "8080:80"
+    volumes:
+      # Monta la cartella 'client' nel percorso di Nginx
+      - ./client:/usr/share/nginx/html
+      # Monta il file di configurazione
+      - ./client/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network
     depends_on:
