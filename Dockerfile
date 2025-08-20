@@ -1,3 +1,5 @@
+# Dockerfile
+# Utilizza un'immagine base di Python
 FROM python:3.10-alpine
 
 # Imposta la cartella di lavoro nel container
@@ -10,8 +12,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia l'intero progetto nella cartella di lavoro
 COPY . .
 
-# Espone la porta che l'app userà
-EXPOSE 5000
+# Sposta la cartella di lavoro nella sottocartella 'src'
+# in cui è stato spostato il file app.py
+WORKDIR /app/src
 
-# Esegui il server Flask.
+# Esegui il server Flask. Il percorso è ora corretto
 CMD ["python", "app.py"]
