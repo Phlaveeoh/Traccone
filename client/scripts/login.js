@@ -23,10 +23,14 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
         messageDiv.style.display = 'block';
         if (response.ok) {
-            //messageDiv.textContent = 'Login riuscito! Token: ' + data.token;
-            //messageDiv.className = 'success';
             localStorage.setItem('jwt_token', data.token);
-            window.location.href = '/dashboard.html';
+            localStorage.setItem('user_id', data.user_id);
+            messageDiv.textContent = 'Login riuscito!';
+            messageDiv.className = 'success';
+
+            setTimeout(() => {
+                window.location.href = '/dashboard.html';
+            }, 500); // Ritardo di 500ms (mezzo secondo) per sicurezza
         } else {
             messageDiv.textContent = 'Errore: ' + (data.error || 'Credenziali non valide');
             messageDiv.className = 'error';

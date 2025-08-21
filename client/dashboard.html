@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <!-- Aggiungi questo link per il CSS di Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        /* Aggiungi stili per dare alla mappa una dimensione. Senza un'altezza, non verrà visualizzata. */
         #map {
             height: 500px;
             width: 100%;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Benvenuto nella Dashboard</h1>
-    <p>Qui puoi vedere le tue posizioni e visualizzare le informazioni del tuo account.</p>
-    <div id="map"></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        function loadMap() {
-            // Crea una mappa Leaflet centrata su una posizione iniziale
-            var map = L.map('map').setView([41.9028, 12.4964], 13); // Esempio: Roma, Italia
+    <div class="container">
+        <div class="header-section">
+            <h1>Benvenuto su Traccone</h1>
+            <a href="#" class="user-profile" title="Vai al tuo profilo">Vai al tuo profilo</a>
+        </div>
+        <p>Qui puoi vedere le tue posizioni e visualizzare le informazioni del tuo account.</p>
 
-            // Aggiungi un layer di mappa di OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-        }
-        loadMap();
-    </script>
+        <!-- Form per il filtro di data e ora -->
+        <div class="filter-form">
+            <input type="date" id="dateInput" name="dateInput">
+            <button id="filterBtn">Filtra Posizioni</button>
+        </div>
+
+        <div id="map"></div>
+    </div>
+    
+    <!-- Link al file JavaScript esterno -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="/scripts/posizioni.js"></script>
 </body>
 </html>
