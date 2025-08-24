@@ -25,7 +25,7 @@ def handle_delete(currentUserId, userID):
 
 @utente_bp.route('/<int:user_id>', methods=['GET'])
 @valida_token
-def handle_visualization(current_user_id, user_id):
-    if current_user_id != user_id:
+def handle_visualization(currentUserID, userID):
+    if currentUserID != userID:
         return jsonify({"errore": "Non sei autorizzato ad accedere a questo contenuto"}), 403
-    return prendiUtente(user_id)
+    return prendiUtente(userID)
