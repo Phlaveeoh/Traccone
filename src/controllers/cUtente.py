@@ -1,11 +1,9 @@
 from flask import request, jsonify
 import traceback
-import psycopg2.extras
 from servizi.servizioDB import connetti_db
 
 def update(userID):
     data = request.get_json()
-    username = data.get('username')
     telefono = data.get('telefono')
     nome = data.get('nome')
     cognome = data.get('cognome')
@@ -14,24 +12,16 @@ def update(userID):
         conn = connetti_db()
         cur = conn.cursor()
 
-        cur.execute("SELECT id FROM users WHERE username = %s;", (username,))
-        if cur.fetchone():
-            return jsonify({'error': 'Username già esistente'}), 409
-
-
-        cur.execute("UPDATE users SET username = %s,telefono = %s,nome = %s,cognome = %s WHERE id = %s", (username, telefono, nome,cognome, userID,))
-        userData = cur.fetchone()
+        cur.execute("UPDATE users SET telefono = %s,nome = %s,cognome = %s WHERE id = %s RETURNING id", (telefono, nome, cognome, userID,))
+        aggiornato = cur.fetchone()
 
         conn.commit()
         cur.close()
         conn.close()
 
-        if userData:
+        if aggiornato:
             return jsonify({
-                'username': username,
-                'telefono': telefono,
-                'nome': nome,
-                'cognome': cognome
+                "message": "Utente aggiornato con successo"
             }), 200
         else:
             return jsonify({'message': 'nessun utente trovato'}), 404
