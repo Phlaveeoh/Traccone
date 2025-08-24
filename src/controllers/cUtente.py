@@ -13,17 +13,15 @@ def eliminaUtente(userID):
         conn = connetti_db()
         cur = conn.cursor()
 
-        cur.execute("DELETE FROM users WHERE id = %s", (userID,))
-        response = cur.fetchone()
+        cur.execute("DELETE FROM users WHERE id = %s RETURNING id", (userID,))
+        eliminato = cur.fetchone()
 
         conn.commit()
         cur.close()
         conn.close()
 
-        if response:
-            return jsonify({
-                'message': "successo",
-            }), 204
+        if eliminato:
+            return 204
         else:
             return jsonify({'message': 'nessun utente trovato'}), 404
     except Exception as e:
