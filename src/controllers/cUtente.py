@@ -1,9 +1,8 @@
 from flask import request, jsonify
 import traceback
-import psycopg2.extras
 from servizi.servizioDB import connetti_db
 
-def update(userID):
+def updateUtente(userID):
     # TODO : update; tuttoh
     # 
     pass
@@ -13,12 +12,12 @@ def eliminaUtente(userID):
     # 
     pass
 
-def prendiUtente(userID):
+def prendiUtente(user_id):
     try :
         conn = connetti_db()
         cur = conn.cursor()
 
-        cur.execute("SELECT username, telefono, nome, cognome from users where id = %s", userID)
+        cur.execute("SELECT username, telefono, nome, cognome from users where id = %s", (user_id,))
         userData = cur.fetchone()
 
         conn.commit()

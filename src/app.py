@@ -6,6 +6,7 @@ import os
 # Importa i router
 from routes.rAutenticazione import auth_bp
 from routes.rPosizioni import posizioni_bp
+from routes.rUtente import utente_bp
 
 # 1. Inizializza l'applicazione Flask
 app = Flask(__name__)
@@ -17,6 +18,8 @@ app.register_blueprint(auth_bp, url_prefix='/api/auth')
 
 # Collega il router delle posizioni al prefisso /api/posizioni
 app.register_blueprint(posizioni_bp, url_prefix='/api/posizioni')
+
+app.register_blueprint(utente_bp, url_prefix='/api/utenti')
 
 # Codice per le WebSockets
 @socketio.on('connect')
