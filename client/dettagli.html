@@ -1,4 +1,4 @@
- <!-- client/login.html -->
+<!-- client/login.html -->
 <!DOCTYPE html>
 <html lang="it">
 
@@ -9,13 +9,14 @@
 
 <body>
     <div class="user-details">
+        
         <h1>Dettagli Utente</h1>
         <form id="userDetailsForm">
             <div class="form-group">
                 <label for="username">Username</label>
-                <label id="username" name="username"></label>
+                <label id="username"></label>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="telefono">Telefono</label>
                 <input type="tel" id="telefono" name="telefono" required>
             </div>
@@ -29,10 +30,28 @@
             </div>
             <button type="submit">Aggiorna informazioni</button>
         </form>
+
+        <form class="cambia-password">
+            <h2>Cambia Password</h2>
+            <div class="form-group">
+                <label for="vecchia_password">Vecchia Password</label>
+                <input type="password" id="vecchia_password" name="vecchia_password" required>
+            </div>
+            <div class="form-group">
+                <label for="nuova_password">Nuova Password</label>
+                <input type="password" id="nuova_password" name="nuova_password" required>
+            </div>
+            <div class="form-group">
+                <label for="conferma_password">Conferma Password</label>
+                <input type="password" id="conferma_password" name="conferma_password" required>
+            </div>
+            <button type="submit">Cambia Password</button>
+        </form>
         <div id="message"></div>
     </div>
+
+    <!-- Link al file JavaScript esterno -->
     <script src="scripts/utente.js"></script>
 </body>
 
 </html>
- 
