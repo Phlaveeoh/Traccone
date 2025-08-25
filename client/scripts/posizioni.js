@@ -82,6 +82,7 @@ async function updateRealtimeLocation() {
 
     try {
         const response = await fetch(url, {
+            method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}` // Invia il token nell'header
             }
@@ -113,6 +114,7 @@ document.getElementById('filterBtn').addEventListener('click', async () => {
 
     try {
         const response = await fetch(url, {
+            method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}` // Invia il token nell'header
             }
