@@ -24,6 +24,7 @@ async function getUtente() {
 }
 
 document.getElementById('updateUserBtn').addEventListener('click', async () => {
+    event.preventDefault();
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('jwt_token');
 
@@ -57,8 +58,17 @@ document.getElementById('updateUserBtn').addEventListener('click', async () => {
 });
 
 document.getElementById('bCambiaPass').addEventListener('click', async () => {
+    event.preventDefault();
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('jwt_token');
+
+    const nuovaPassword = document.getElementById("nuova_password").value;
+    const confermaPassword = document.getElementById("conferma_password").value;
+
+    if (confermaPassword != nuovaPassword) {
+        document.getElementById("message").innerText = "le 2 password non coincidono!"
+        return;
+    }
 
     const url = `/api/utenti/${user_id}/cambiaPassword`;
 
@@ -66,12 +76,6 @@ document.getElementById('bCambiaPass').addEventListener('click', async () => {
         vecchia_password: document.getElementById("vecchia_password").value,
         nuova_password: document.getElementById("nuova_password").value,
     };
-    let confermaPass =  document.getElementById("conferma_password")
-
-    if (confermaPass != formData.nuova_password) {
-        document.getElementById("message").innerText("le 2 password non coincidono!")
-        return;
-    }
 
     try {
         const response = await fetch(url, {
