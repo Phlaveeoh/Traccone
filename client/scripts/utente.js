@@ -56,6 +56,46 @@ document.getElementById('updateUserBtn').addEventListener('click', async () => {
     }
 });
 
+document.getElementById('bCambiaPass').addEventListener('click', async () => {
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem('jwt_token');
+
+    const url = `/api/utenti/${user_id}/cambiaPassword`;
+
+    const formData = {
+        vecchia_password: document.getElementById("vecchia_password").value,
+        nuova_password: document.getElementById("nuova_password").value,
+    };
+    let confermaPass =  document.getElementById("conferma_password")
+
+    if (confermaPass != formData.nuova_password) {
+        document.getElementById("message").innerText("le 2 password non coincidono!")
+        return;
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            document.getElementById("message").innerText = "Password utente aggiornate con successo.";
+            getUtente();
+        } else {
+            document.getElementById("message").innerText = "Errore nell'aggiornamento della password utente";
+        }
+    } catch (error) {
+        console.error("Errore nella richiesta:", error);
+    }
+});
+
+
+
 //Appena carico la finestra stampo nel form i dati dell'utente
 window.onload = () => {
     getUtente();
