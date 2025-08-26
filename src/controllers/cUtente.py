@@ -47,7 +47,7 @@ def cambiaPassword(user_id):
         cur.execute("SELECT password from users where id = %s", (user_id,))
         password_attuale = cur.fetchone()
         #Controllo che la password attuale inserita dall'utente sia la stessa inserita nel database
-        if not (bcrypt.checkpw(vecchia_password.encode('utf-8'), password_attuale.encode('utf-8'))):
+        if not (bcrypt.checkpw(vecchia_password.encode('utf-8'), password_attuale[0].encode('utf-8'))):
             return jsonify({'message': 'La password attuale inserita non è valida'}), 401
         
         #Aggiorno la password con la nuova password
