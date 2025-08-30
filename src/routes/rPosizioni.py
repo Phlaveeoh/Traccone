@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request
 
-# Importa la logica del controller
+#Importa la logica del controller
 from controllers.cPosizioni import salvaPosizione, getPath, salvaBulk, getLastPosition
 from servizi.servizioAutenticatore import valida_token
 
-# Crea un Blueprint
+#Crea un Blueprint
 posizioni_bp = Blueprint('location', __name__)
 
 #/api/posizioni/save 
@@ -19,7 +19,7 @@ def handle_save(user_id):
 def handle_save_bulk(user_id):
     return salvaBulk(user_id)
 
-# Definizione del percorso per ottenere lo storico delle posizioni di un utente
+#api/posizioni/<user_id>/lastPosition
 @posizioni_bp.route('/<int:user_id>/lastPosition', methods=['GET'])
 @valida_token
 def handle_get_last_position(current_user_id, user_id):
@@ -27,7 +27,7 @@ def handle_get_last_position(current_user_id, user_id):
         return jsonify({"errore": "Non sei autorizzato ad accedere a questo contenuto"}), 403
     return getLastPosition(user_id)
 
-# Definizione del percorso per ottenere lo storico delle posizioni di un utente
+#api/posizioni/<user_id>?data=YYYY-MM-DD
 @posizioni_bp.route('/<int:user_id>', methods=['GET'])
 @valida_token
 def handle_get_path(current_user_id, user_id):

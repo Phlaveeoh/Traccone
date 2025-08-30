@@ -4,17 +4,22 @@ import bcrypt
 from servizi.servizioDB import connetti_db
 from servizi.servizioAutenticatore import hash_password
 
-#Metodo per aggiornare un utente
 def updateUtente(userID):
+    '''
+    Metodo per aggiornare le informazioni di un utente
+    ''' 
+    #Prendo i dati JSON dalla richiesta
     data = request.get_json()
     telefono = data.get('telefono')
     nome = data.get('nome')
     cognome = data.get('cognome')
 
     try :
+        #Connessione al database
         conn = connetti_db()
         cur = conn.cursor()
 
+        #Eseguo la query di aggiornamento
         cur.execute("UPDATE users SET telefono = %s,nome = %s,cognome = %s WHERE id = %s RETURNING id", (telefono, nome, cognome, userID,))
         aggiornato = cur.fetchone()
 
@@ -22,24 +27,31 @@ def updateUtente(userID):
         cur.close()
         conn.close()
 
+        #Se la query è andata a buon fine ritorno un messaggio di successo
         if aggiornato:
             return jsonify({
                 "message": "Utente aggiornato con successo"
             }), 200
         else:
             return jsonify({'message': 'nessun utente trovato'}), 404
+        
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
 
-#Metodo per cambiare la password
+
 def cambiaPassword(user_id):
+    '''
+    Metodo per cambiare la password di un utente
+    ''' 
+    #Prendo i dati JSON dalla richiesta
     data = request.get_json()
     vecchia_password = data.get('vecchia_password')
     nuova_password = data.get('nuova_password')
 
     try :
+        #Connessione al database
         conn = connetti_db()
         cur = conn.cursor()
         
@@ -59,6 +71,7 @@ def cambiaPassword(user_id):
         cur.close()
         conn.close()
 
+        #Se la query è andata a buon fine ritorno un messaggio di successo
         if aggiornato:
             return jsonify({
                 "message": "Password cambiata con successo"
@@ -71,12 +84,17 @@ def cambiaPassword(user_id):
         traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
 
-#Metodo per eliminare un utente
+
 def deleteUtente(userID):
+    '''
+    Metodo per eliminare un utente
+    ''' 
     try :
+        #Connessione al database
         conn = connetti_db()
         cur = conn.cursor()
 
+        #Eseguo la query di eliminazione
         cur.execute("DELETE FROM users WHERE id = %s RETURNING id", (userID,))
         eliminato = cur.fetchone()
 
@@ -84,21 +102,28 @@ def deleteUtente(userID):
         cur.close()
         conn.close()
 
+        #Se la query è andata a buon fine ritorno un messaggio di successo
         if eliminato:
             return 204
         else:
             return jsonify({'message': 'nessun utente trovato'}), 404
+        
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
 
-#Metodo per ottenere le info di un utente
+
 def getUtente(userID):
+    '''
+    Metodo per ottenere le informazioni di un utente
+    ''' 
     try :
+        #Connessione al database
         conn = connetti_db()
         cur = conn.cursor()
 
+        #Ottengo le informazioni dell'utente
         cur.execute("SELECT username, telefono, nome, cognome from users where id = %s", (userID,))
         userData = cur.fetchone()
 
@@ -106,6 +131,7 @@ def getUtente(userID):
         cur.close()
         conn.close()
 
+        #Se la query è andata a buon fine ritorno le informazioni dell'utente
         if userData:
             username = userData[0]
             telefono = userData[1]
@@ -120,6 +146,7 @@ def getUtente(userID):
             }), 200
         else:
             return jsonify({'message': 'nessun utente trovato'}), 404
+        
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         traceback.print_exc()

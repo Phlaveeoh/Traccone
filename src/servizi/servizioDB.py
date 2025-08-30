@@ -7,6 +7,7 @@ def connetti_db():
     Le credenziali sono lette dalle variabili d'ambiente.
     """
     try:
+        #Tenta di connettersi al database usando le variabili d'ambiente
         conn = psycopg2.connect(
             host=os.environ.get('DB_HOST'),
             database=os.environ.get('DB_NAME'),

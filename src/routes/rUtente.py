@@ -1,12 +1,11 @@
 from flask import Blueprint, jsonify, request
 
-# Importa la logica del controller
+#Importa la logica del controller
 from controllers.cUtente import updateUtente, cambiaPassword, deleteUtente, getUtente
 from servizi.servizioAutenticatore import valida_token
 
-# Crea un Blueprint
+#Crea un Blueprint
 utente_bp = Blueprint('utenti', __name__)
-
 
 #/api/utenti/<user_id>/update
 @utente_bp.route('/<int:user_id>/update', methods=['PATCH'])
