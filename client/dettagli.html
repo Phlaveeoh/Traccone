@@ -5,6 +5,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef1f5;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .user-details {
+            background-color: #fff;
+            padding: 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .user-details h1,
+        .user-details h2 {
+            margin-bottom: 1em;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .user-details h2 {
+            margin-top: 2em;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5em;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6em;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 0.9em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Stile specifico per la label che mostra lo username (non editabile) */
+        .form-group label[id="username"] {
+            font-weight: normal;
+            color: #333;
+            padding-top: 0.4em;
+            /* Allineamento con gli input */
+            border: 1px solid #e0e0e0;
+            /* Un leggero bordo per distinguerla */
+            background-color: #f8f9fa;
+            /* Sfondo leggermente diverso */
+            border-radius: 8px;
+            padding: 0.9em;
+            /* Stesso padding degli input */
+            display: block;
+            /* Assicura che occupi la riga */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1em;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        #bCambiaPass {
+            background-color: #dc3545;
+        }
+
+        #bCambiaPass:hover {
+            background-color: #c82333;
+        }
+
+        #message {
+            margin-top: 1.5em;
+            color: #dc3545;
+            /* Colore rosso per i messaggi di errore */
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,11 +138,11 @@
             </div>
             <div class="form-group">
                 <label for="telefono">Telefono</label>
-                <input type="tel" id="telefono" name="telefono" maxlength="20" required >
+                <input type="tel" id="telefono" name="telefono" maxlength="20" required>
             </div>
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" maxlength="50" required >
+                <input type="text" id="nome" name="nome" maxlength="50" required>
             </div>
             <div class="form-group">
                 <label for="cognome">cognome</label>
